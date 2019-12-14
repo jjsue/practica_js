@@ -44,7 +44,7 @@ function fromArabToRoman(number){
     let countD = 0; // 500 / R: NO
     let countM = 0; // 1000 / R: 3
     let romanString = '';
-    while (number !== 0){
+    while (number != 0){
         if (number >= 1000 && countM < 3){
             countM++;
             number -= 1000;
@@ -83,11 +83,11 @@ function fromArabToRoman(number){
         }
         if (number >= 1 && countI < 3){
             countI++;
-            number -= 5;
+            number -= 1;
             romanString += 'I';
             continue;
         } //Ahora lo que hay que hacer es comprobar cada vez que Llegue al tope, es decir, comprobar si está entre 1 y 5
     }
     return romanString;
 }
-console.log(fromArabToRoman(3));
+console.log(fromArabToRoman(45));
