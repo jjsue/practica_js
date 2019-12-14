@@ -86,8 +86,9 @@ function fromArabToRoman(number){
             number -= 1;
             romanString += 'I';
             continue;
-        } //Ahora lo que hay que hacer es comprobar cada vez que Llegue al tope, es decir, comprobar si está entre 1 y 5
+        }
     }
     return romanString;
 }
-console.log(fromArabToRoman(45));
+const arg = process.argv.splice(2); //Pillamos por argumentos.
+console.log(fromArabToRoman(parseInt(arg[0])));
