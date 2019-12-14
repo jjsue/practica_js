@@ -87,6 +87,14 @@ function fromArabToRoman(number){
             romanString += 'I';
             continue;
         }
+        if (countI === 3){ //Esto me va a decir si hay que poner un 4
+            romanString = romanString.slice(0,-3);
+            console.log(romanString);
+            number += 3;
+            romanString += 'IV';
+            number -= 4;
+            continue;
+        }
     }
     return romanString;
 }
