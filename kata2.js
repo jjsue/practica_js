@@ -30,7 +30,6 @@ function reverse(string) { //Funcion que me da la vuelta a una cadena.
     return reverseString;
 }
 function fromArabToRoman(arabNumber){
-    //Lo iba a hacer con diccionarios pero creo que va a ser mejor con array.
     const arabString = reverse(arabNumber.toString());
     let unidades = '';
     let decenas = '';
@@ -71,9 +70,88 @@ function fromArabToRoman(arabNumber){
                     break;
             }
         }
+        if (i === 1){ //Aqui estamos en las decenas.
+            switch(arabString[i]) {
+                case '1':
+                    decenas = 'X';
+                    break;
+                case '2':
+                    decenas = 'XX';
+                    break;
+                case '3':
+                    decenas = 'XXX';
+                    break;
+                case '4':
+                    decenas = 'XL';
+                    break;
+                case '5':
+                    decenas = 'L';
+                    break;
+                case '6':
+                    decenas = 'LX';
+                    break;
+                case '7':
+                    decenas = 'LXX'
+                    break;
+                case '8':
+                    decenas = 'LXXX';
+                    break;
+                case '9':
+                    decenas = 'XC';
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (i === 2){ //Controlamos las centenas.
+            switch(arabString[i]) {
+                case '1':
+                    centenas = 'C';
+                    break;
+                case '2':
+                    centenas = 'CC';
+                    break;
+                case '3':
+                    centenas = 'CCC';
+                    break;
+                case '4':
+                    centenas = 'CD';
+                    break;
+                case '5':
+                    centenas = 'D';
+                    break;
+                case '6':
+                    centenas = 'DC';
+                    break;
+                case '7':
+                    centenas = 'DCC'
+                    break;
+                case '8':
+                    centenas = 'DCCC';
+                    break;
+                case '9':
+                    centenas = 'CM';
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (i === 3){ //Millares
+            switch (arabString[i]){
+                case '1':
+                    millares = 'M';
+                    break;
+                case '2':
+                    millares = 'MM';
+                    break;
+                case '3':
+                    millares = 'MMM';
+                    break;
+                default:
+                    break;
+            }
+        }
     }
     romanString = millares + centenas + decenas + unidades;
     return romanString;
 }
-
-console.log(fromArabToRoman(9));
