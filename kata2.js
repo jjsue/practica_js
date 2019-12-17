@@ -228,5 +228,49 @@ function validator(romanNumber){
                 return false;
         }
     }
+    for(i = 0; i< romanNumber.length; i++){///Controlamos ahora las repeticiones de numeros.
+        //Voy a poner primero todos los contadores numericos.
+        if (romanNumber[i] === 'M'){
+            countM++;
+        }
+        if (romanNumber[i] === 'D'){
+            countD++;
+            if (countC > 1){ //No puede haber mas de un restador.
+                return false;
+            }
+            countC = 0; //Si hubiera habido C antes de la D lo pongo a cero.
+        }
+        if (romanNumber[i] === 'C'){
+            countC++;
+        }
+        if (romanNumber[i] === 'L'){
+            countL++;
+            if (countX > 1){ //No puede haber mas de un restador.
+                return false;
+            }
+            CountX = 0; //Si hubiera X restadoras las reseteo;
+        }
+        if (romanNumber[i] === 'X'){
+            countX++;
+        }
+        if (romanNumber[i] === 'V'){
+            countV++;
+            if (countI > 1){ //No puede haber mas de un restador.
+                return false;
+            }
+            countI = 0; //Ponemos a 0 los unos restadores.
+        }
+        if (romanNumber[i] === 'I'){
+            countI++;
+        }
+        //A partir de aqui y en cada iteracion vamos a comprobar si los contadores se pasan de 3 o de 1 dependiendo de cada numero.
+        if (countM > 3 || countC > 3 || countX > 3 || countI > 3){
+            return false;
+        }
+        if (countD > 1 || countL > 1 || countV > 1){
+            return false;
+        }
+    }
+    return true;
 }
-console.log(validator('XV'));
+console.log(validator('IV'));
