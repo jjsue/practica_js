@@ -199,4 +199,34 @@ function romanToArab(romanNumber){
     }
     return arabNumber;
 }
-//.indexOf() Para saber la posicion en un array.
+function validator(romanNumber){
+    let countM = 0, countD = 0, countC = 0, countL = 0, countX = 0, countV = 0, countI = 0;
+    for(let i = 0; i < romanNumber.length; i++){ //Comprobamos que no haya ninguna letra extraña.
+        switch(romanNumber[i]) {
+            case 'I':
+                continue;
+                break;
+            case 'V':
+                continue;
+                break;
+            case 'X':
+                continue;
+                break;
+            case 'L':
+                continue;
+                break;
+            case 'C':
+                continue;
+                break;
+            case 'D':
+                continue;
+                break;
+            case 'M':
+                continue;
+                break;
+            default:
+                return false;
+        }
+    }
+}
+console.log(validator('XV'));
