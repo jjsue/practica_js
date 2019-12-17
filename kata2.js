@@ -29,7 +29,7 @@ function reverse(string) { //Funcion que me da la vuelta a una cadena.
     }
     return reverseString;
 }
-function fromArabToRoman(arabNumber){
+function ArabToRoman(arabNumber){
     const arabString = reverse(arabNumber.toString());
     let unidades = '';
     let decenas = '';
@@ -155,3 +155,48 @@ function fromArabToRoman(arabNumber){
     romanString = millares + centenas + decenas + unidades;
     return romanString;
 }
+
+function romanToArab(romanNumber){
+    //Voy a crear dos arrays para tener en todo momento los valores arabes de los numeros romanos.
+    let romans = ['M', 'D', 'C', 'L', 'X', 'V', 'I'];
+    let arabs = [1000, 500, 100, 50, 10, 5, 1];
+    let temPlus = 0; //El valor que se sumará o restará.
+    let arabNumber = 0; //El numero arabe que retornaremos al usuario.
+    let lastRoman = ''; //El ultimo valor romano que tenemos
+    for (let i = 0; i <= romanNumber.length; i++){
+        if (romanNumber[i] != lastRoman){ //La comprobacion de si el anterior es mayor o menor.
+            if (arabs[romans.indexOf(romanNumber[i])] < arabs[romans.indexOf(lastRoman)]){
+                arabNumber += temPlus;
+            }
+            else{
+                arabNumber -= temPlus;
+            }
+            temPlus = 0;
+        }
+        if (romanNumber[i] === 'M'){
+            arabNumber += arabs[romans.indexOf(romanNumber[i])];
+        }
+        if (romanNumber[i] === 'D'){
+            arabNumber += arabs[romans.indexOf(romanNumber[i])];
+        }
+        if (romanNumber[i] === 'C'){
+            temPlus += arabs[romans.indexOf(romanNumber[i])]
+        }
+        if (romanNumber[i] === 'L'){
+            temPlus += arabs[romans.indexOf(romanNumber[i])]
+        }
+        if (romanNumber[i] === 'X'){
+            temPlus += arabs[romans.indexOf(romanNumber[i])]
+        }
+        if (romanNumber[i] === 'V'){
+            temPlus += arabs[romans.indexOf(romanNumber[i])]
+        }
+        if (romanNumber[i] === 'I'){
+            temPlus += arabs[romans.indexOf(romanNumber[i])]
+        }
+        lastRoman = romanNumber[i];
+    }
+    return arabNumber;
+}
+//.indexOf() Para saber la posicion en un array.
+console.log(romanToArab('XV'));
