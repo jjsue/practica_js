@@ -158,8 +158,9 @@ function ArabToRoman(arabNumber){
 
 function romanToArab(romanNumber){
     //Voy a crear dos arrays para tener en todo momento los valores arabes de los numeros romanos.
-    let romans = ['M', 'D', 'C', 'L', 'X', 'V', 'I'];
-    let arabs = [1000, 500, 100, 50, 10, 5, 1];
+    let romans = ['M', 'D', 'C', 'L', 'X', 'V', 'I', 'E'];
+    let arabs = [1000, 500, 100, 50, 10, 5, 1, 0]; //Esa E y ese 0 es un fix para que si ponemos solo XXX o III o estos están al final los sume.
+    romanNumber += 'E'; //Aqui la añado
     let temPlus = 0; //El valor que se sumará o restará.
     let arabNumber = 0; //El numero arabe que retornaremos al usuario.
     let lastRoman = ''; //El ultimo valor romano que tenemos
@@ -183,13 +184,13 @@ function romanToArab(romanNumber){
             temPlus += arabs[romans.indexOf(romanNumber[i])]
         }
         if (romanNumber[i] === 'L'){
-            temPlus += arabs[romans.indexOf(romanNumber[i])]
+            arabNumber += arabs[romans.indexOf(romanNumber[i])]
         }
         if (romanNumber[i] === 'X'){
             temPlus += arabs[romans.indexOf(romanNumber[i])]
         }
         if (romanNumber[i] === 'V'){
-            temPlus += arabs[romans.indexOf(romanNumber[i])]
+            arabNumber += arabs[romans.indexOf(romanNumber[i])]
         }
         if (romanNumber[i] === 'I'){
             temPlus += arabs[romans.indexOf(romanNumber[i])]
@@ -199,4 +200,3 @@ function romanToArab(romanNumber){
     return arabNumber;
 }
 //.indexOf() Para saber la posicion en un array.
-console.log(romanToArab('XV'));
