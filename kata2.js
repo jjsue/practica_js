@@ -201,6 +201,7 @@ function romanToArab(romanNumber){
 }
 function validator(romanNumber){
     let countM = 0, countD = 0, countC = 0, countL = 0, countX = 0, countV = 0, countI = 0;
+    let romans = ['M', 'D', 'C', 'L', 'X', 'V', 'I'];
     for(let i = 0; i < romanNumber.length; i++){ //Comprobamos que no haya ninguna letra extraña.
         switch(romanNumber[i]) {
             case 'I':
@@ -228,7 +229,7 @@ function validator(romanNumber){
                 return false;
         }
     }
-    for(i = 0; i< romanNumber.length; i++){///Controlamos ahora las repeticiones de numeros.
+    for(i = 0; i < romanNumber.length; i++){///Controlamos ahora las repeticiones de numeros.
         //Voy a poner primero todos los contadores numericos.
         if (romanNumber[i] === 'M'){
             countM++;
@@ -271,6 +272,52 @@ function validator(romanNumber){
             return false;
         }
     }
-    return true;
+    for (i = 0; i < romanNumber.length; i++){
+        if (romanNumber[i] === 'I'){ //Comprobamos las condiciones para I
+            if (romanNumber[i+1] === undefined){ //Si ya no quedan numeros.
+                continue;
+            }
+            if (romanNumber[i+1] === romans[romans.indexOf(romanNumber[i])]){
+                continue;
+            }
+            if (romanNumber[i+1] === romans[romans.indexOf(romanNumber[i])-1]){
+                continue;
+            }
+            if (romanNumber[i+1] === romans[romans.indexOf(romanNumber[i])-2]){
+                continue;
+            }
+            else{
+                return false;
+            }
+        }
+        if (romanNumber[i] === 'X'){ //Condiciones para X
+            if (romanNumber[i+1] === 'X'){
+                continue;
+            }
+            if (romanNumber[i+1] === 'L'){
+                continue;
+            }
+            if (romanNumber[i+1] === 'C'){
+                continue;
+            }
+            else{
+                return false;
+            }
+        }
+        if (romanNumber[i] === 'C'){ //Condiciones para C
+            if (romanNumber[i+1] === 'C'){
+                continue;
+            }
+            if (romanNumber[i+1] === 'D'){
+                continue;
+            }
+            if (romanNumber[i+1] === 'M'){
+                continue;
+            }
+            else{
+                return false;
+            }
+        }
+    }
 }
-console.log(validator('IV'));
+console.log(validator('II'));
