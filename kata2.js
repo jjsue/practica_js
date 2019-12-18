@@ -202,6 +202,7 @@ function romanToArab(romanNumber){
 function validator(romanNumber){
     let countM = 0, countD = 0, countC = 0, countL = 0, countX = 0, countV = 0, countI = 0;
     let romans = ['M', 'D', 'C', 'L', 'X', 'V', 'I'];
+    let checkJ =  false;
     for(let i = 0; i < romanNumber.length; i++){ //Comprobamos que no haya ninguna letra extraña.
         switch(romanNumber[i]) {
             case 'I':
@@ -273,8 +274,9 @@ function validator(romanNumber){
         }
     }
     for (i = 0; i < romanNumber.length; i++){
+        checkJ = false; //Por cada iteracion hay que poner a false el check, si no no sirve de nada.
         if (romanNumber[i] === 'I'){ //Comprobamos las condiciones para I
-            if (romanNumber[i+1] === undefined){ //Si ya no quedan numeros.
+            if (romanNumber[i+1] === undefined){ //Si ya no quedan numeros
                 continue;
             }
             if (romanNumber[i+1] === romans[romans.indexOf(romanNumber[i])]){
@@ -291,8 +293,14 @@ function validator(romanNumber){
             }
         }
         if (romanNumber[i] === 'X'){ //Condiciones para X
-            if (romanNumber[i+1] === 'X'){
+            if (romanNumber[i+1] === undefined){ //Si ya no quedan numeros
                 continue;
+            }
+            for(let j = romans.indexOf(romanNumber[i]); j < romans.length; j++){ //Con este bucle comprobamos que cualquier numero que sea menor puede estar tras la X
+                if (romanNumber[i+1] === romans[j]){
+                    checkJ = true;
+                    break;
+                }
             }
             if (romanNumber[i+1] === 'L'){
                 continue;
@@ -300,13 +308,22 @@ function validator(romanNumber){
             if (romanNumber[i+1] === 'C'){
                 continue;
             }
+            if (checkJ){ //Aqui tenemos lo que hemos realizado con el bucle.
+                continue;
+            }
             else{
                 return false;
             }
         }
         if (romanNumber[i] === 'C'){ //Condiciones para C
-            if (romanNumber[i+1] === 'C'){
+            if (romanNumber[i+1] === undefined){ //Si ya no quedan numeros
                 continue;
+            }
+            for(let j = romans.indexOf(romanNumber[i]); j < romans.length; j++){ //Con este bucle comprobamos que cualquier numero que sea menor puede estar tras la X
+                if (romanNumber[i+1] === romans[j]){
+                    checkJ = true;
+                    break;
+                }
             }
             if (romanNumber[i+1] === 'D'){
                 continue;
@@ -314,10 +331,83 @@ function validator(romanNumber){
             if (romanNumber[i+1] === 'M'){
                 continue;
             }
+            if (checkJ){ //Aqui tenemos lo que hemos realizado con el bucle.
+                continue;
+            }
+            else{
+                return false;
+            }
+        }
+        //Con esto tenemos validados los numeros con mas condiciones, de aquí hacía delante nos queda M V L D que a su derecha solo pueden tener numeros mas pequeños, así que nos quedamos solo con la parte del bucle J
+        if (romanNumber[i] === 'V'){
+            if (romanNumber[i+1] === undefined){ //Si ya no quedan numeros
+                continue;
+            }
+            for(let j = romans.indexOf(romanNumber[i]); j < romans.length; j++){ //Con este bucle comprobamos que cualquier numero que sea menor puede estar tras la X
+                if (romanNumber[i+1] === romans[j]){
+                    checkJ = true;
+                    break;
+                }
+            }
+            if (checkJ){ //Aqui tenemos lo que hemos realizado con el bucle.
+                continue;
+            }
+            else{
+                return false;
+            }
+        }
+        if (romanNumber[i] === 'L'){
+            if (romanNumber[i+1] === undefined){ //Si ya no quedan numeros
+                continue;
+            }
+            for(let j = romans.indexOf(romanNumber[i]); j < romans.length; j++){ //Con este bucle comprobamos que cualquier numero que sea menor puede estar tras la X
+                if (romanNumber[i+1] === romans[j]){
+                    checkJ = true;
+                    break;
+                }
+            }
+            if (checkJ){ //Aqui tenemos lo que hemos realizado con el bucle.
+                continue;
+            }
+            else{
+                return false;
+            }
+        }
+        if (romanNumber[i] === 'D'){
+            if (romanNumber[i+1] === undefined){ //Si ya no quedan numeros
+                continue;
+            }
+            for(let j = romans.indexOf(romanNumber[i]); j < romans.length; j++){ //Con este bucle comprobamos que cualquier numero que sea menor puede estar tras la X
+                if (romanNumber[i+1] === romans[j]){
+                    checkJ = true;
+                    break;
+                }
+            }
+            if (checkJ){ //Aqui tenemos lo que hemos realizado con el bucle.
+                continue;
+            }
+            else{
+                return false;
+            }
+        }
+        if (romanNumber[i] === 'M'){
+            if (romanNumber[i+1] === undefined){ //Si ya no quedan numeros
+                continue;
+            }
+            for(let j = romans.indexOf(romanNumber[i]); j < romans.length; j++){ //Con este bucle comprobamos que cualquier numero que sea menor puede estar tras la X
+                if (romanNumber[i+1] === romans[j]){
+                    checkJ = true;
+                    break;
+                }
+            }
+            if (checkJ){ //Aqui tenemos lo que hemos realizado con el bucle.
+                continue;
+            }
             else{
                 return false;
             }
         }
     }
+    return true;
 }
-console.log(validator('II'));
+console.log(validator('MVI'));
