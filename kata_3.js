@@ -48,9 +48,9 @@ function pokerConversor(playerToConvert){
             playerToConvert[i].value = 14;
         }
     }
-    let playerOrdered = [], minorValue = 15, position, actualValue;
+    let playerOrdered = [], minorValue = 15, position, actualValue = 0;
     //Ademas de conversor lo vamos a usar para ordenar las cartas por su valor del 2 al 14.
-    for (i = 0; i < playerToConvert.length; i++){
+    for (i = 0; i < playerToConvert.length; i = 0){
         for (let j = 0; j < playerToConvert.length; j++){
             /*if (playerToConvert[j] === undefined){
                 continue;
@@ -60,9 +60,10 @@ function pokerConversor(playerToConvert){
                 position = j;
             }
         }
-        playerOrdered[i] = playerToConvert[position];
+        playerOrdered[actualValue] = playerToConvert[position];
         playerToConvert.splice(position, 1);
         minorValue = 15;
+        actualValue++;
     }
     console.log(playerOrdered);
     return playerOrdered;
