@@ -65,7 +65,6 @@ function pokerConversor(playerToConvert){
         minorValue = 15;
         actualValue++;
     }
-    console.log(playerOrdered);
     return playerOrdered;
 }
 
@@ -73,9 +72,12 @@ function pokerRules(player){
     //Convertimos a valores numericos todos los valores para que sea mas sencillo de analizar.
     player = pokerConversor(player);
     //Empezamos por la regla mas alta. Escalera de color.
-    if (player[0].palo === player[1].palo && player[0].palo === player[2].palo && player[0].palo === player[3].palo && player[0].palo === player[4].palo){
-        console.log("Tiene una escalera de color.")
-
+    if ((player[0].palo === player[1].palo && player[0].palo === player[2].palo && player[0].palo === player[3].palo && player[0].palo === player[4].palo) && (player[0].value + 1 === player[1].value && player[1].value + 1 === player[2].value && player[2].value + 1 === player[3].value && player[3].value + 1 === player[4].value)){
+        console.log("Tiene escalera de color");
+    }
+    // Vamos con el four of a kind o poker.
+    if ((player[0].value === player[1].value && player[0].value === player[2].value && player[0].value === player[3].value) || (player[1].value === player[2].value && player[1].value === player[3].value && player[1].value === player[4].value)){
+        console.log("Tiene poker");
     }
 }
 
@@ -95,7 +97,7 @@ function pokerGame(){
             playerTwo.push(mixed[i]);
         }
     }*/
-    playerOne = [{palo: 'S', value: 'Q'}, {palo: 'H', value: 'T'}, {palo: 'H', value: 'Q'}, {palo: 'S', value: 'K'}, {palo: 'S', value: 'J'}];
+    playerOne = [{palo: 'S', value: 'T'}, {palo: 'H', value: 'T'}, {palo: 'S', value: 'A'}, {palo: 'C', value: 'T'}, {palo: 'D', value: 'T'}];
     //Con las manos ya barajadas toca ver quien gana. Vamos a crear una función a parte para ordenarlo un poco.
     pokerRules(playerOne);
 }
