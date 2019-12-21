@@ -175,8 +175,10 @@ function pokerGame(){
             playerTwo.push(mixed[i]);
         }
     }
-    const p1Results = pokerRules(playerOne);
-    const p2Results = pokerRules(playerTwo);
+    //const p1Results = pokerRules(playerOne);
+    //const p2Results = pokerRules(playerTwo);
+    const p1Results = [2, 'con pareja', {palo: 'H', value: 2}, {palo: 'S', value: 2}, {palo: 'D', value: 4}, {palo: 'D', value: 5}, {palo: 'D', value: 6}]
+    const p2Results = [2, 'con pareja', {palo: 'C', value: 3}, {palo: 'D', value: 3}, {palo: 'D', value: 4}, {palo: 'D', value: 5}, {palo: 'D', value: 6}]
     if (p1Results[0] > p2Results[0]){
         console.log(`Gana jugador uno ${p1Results[1]}. Su mano era: ${p1Results[2][0].palo}${p1Results[2][0].value} ${p1Results[2][1].palo}${p1Results[2][1].value} ${p1Results[2][2].palo}${p1Results[2][2].value} ${p1Results[2][3].palo}${p1Results[2][3].value} ${p1Results[2][4].palo}${p1Results[2][4].value}`);
     }
@@ -196,7 +198,54 @@ function pokerGame(){
             }
             else{
                 playerTwo = pokerConversorVuelta(playerTwo); //Esto lo pongo porque la constante cambia al ejecutar esta funcion.
-                console.log(`Gana jugador 2 ${p1Results[1]}. Su mano era: ${p2Results[2][0].palo}${p2Results[2][0].value} ${p2Results[2][1].palo}${p2Results[2][1].value} ${p2Results[2][2].palo}${p2Results[2][2].value} ${p2Results[2][3].palo}${p2Results[2][3].value} ${p2Results[2][4].palo}${p2Results[2][4].value}`);
+                console.log(`Gana jugador 2 ${p2Results[1]}. Su mano era: ${p2Results[2][0].palo}${p2Results[2][0].value} ${p2Results[2][1].palo}${p2Results[2][1].value} ${p2Results[2][2].palo}${p2Results[2][2].value} ${p2Results[2][3].palo}${p2Results[2][3].value} ${p2Results[2][4].palo}${p2Results[2][4].value}`);
+            }
+        }
+        //Empate a parejas
+        else if (p1Results[0] === 2){
+            //Primero detectamos la doble pareja en cada mano.
+            console.log(p1Results);
+            let valueP1, valueP2, firstCard = p1Results[2][0].value;
+            for (let i = 1; i > 5; i++){ //Compara cada carta con su anterior y si detectamos la pareja guardamos.
+                if(firstCard === playerOne[i].value){ //Saber si la anterior es igual.
+                    valueP1 = p1Results[2][i].value;
+                }
+                else{
+                    firstCard = p1Results[2][i].value;
+                }
+            }
+            firstCard = p2Results[2][0].value;
+            for (let i = 1; i > 5; i++){ //Compara cada carta con su anterior y si detectamos la pareja guardamos.
+                if(firstCard === playerTwo[i].value){ //Saber si la anterior es igual.
+                    valueP2 = p2Results[2][i].value;
+                }
+                else{
+                    firstCard = p2Results[2][i].value;
+                }
+            }
+            if (valueP1 > valueP2){ 
+                playerOne = pokerConversorVuelta(playerOne); //Esto lo pongo porque la constante cambia al ejecutar esta funcion.
+                console.log(`Gana jugador 1 ${p1Results[1]}. Su mano era: ${p1Results[2][0].palo}${p1Results[2][0].value} ${p1Results[2][1].palo}${p1Results[2][1].value} ${p1Results[2][2].palo}${p1Results[2][2].value} ${p1Results[2][3].palo}${p1Results[2][3].value} ${p1Results[2][4].palo}${p1Results[2][4].value}`);
+            }
+            else if (valueP1 === valueP2){
+                //Esto basicamente es comprobar la carta mas alta.
+                if (playerOne[4].value > playerTwo[4].value){ 
+                    playerOne = pokerConversorVuelta(playerOne); //Esto lo pongo porque la constante cambia al ejecutar esta funcion.
+                    console.log(`Gana jugador 1 ${p1Results[1]}. Su mano era: ${p1Results[2][0].palo}${p1Results[2][0].value} ${p1Results[2][1].palo}${p1Results[2][1].value} ${p1Results[2][2].palo}${p1Results[2][2].value} ${p1Results[2][3].palo}${p1Results[2][3].value} ${p1Results[2][4].palo}${p1Results[2][4].value}`);
+                }
+                else if (p1Results[0] === p2Results[0]){
+                    playerOne = pokerConversorVuelta(playerOne); //Esto lo pongo porque la constante cambia al ejecutar esta funcion.
+                    playerTwo = pokerConversorVuelta(playerTwo);
+                    console.log(`Empate a dobles parejas.\n La mano del jugador uno era: ${p1Results[2][0].palo}${p1Results[2][0].value} ${p1Results[2][1].palo}${p1Results[2][1].value} ${p1Results[2][2].palo}${p1Results[2][2].value} ${p1Results[2][3].palo}${p1Results[2][3].value} ${p1Results[2][4].palo}${p1Results[2][4].value}. \n La mano del jugador dos era: ${p2Results[2][0].palo}${p2Results[2][0].value} ${p2Results[2][1].palo}${p2Results[2][1].value} ${p2Results[2][2].palo}${p2Results[2][2].value} ${p2Results[2][3].palo}${p2Results[2][3].value} ${p2Results[2][4].palo}${p2Results[2][4].value}.`);
+                }
+                else{
+                    playerTwo = pokerConversorVuelta(playerTwo); //Esto lo pongo porque la constante cambia al ejecutar esta funcion.
+                    console.log(`Gana jugador 2 ${p2Results[1]}. Su mano era: ${p2Results[2][0].palo}${p2Results[2][0].value} ${p2Results[2][1].palo}${p2Results[2][1].value} ${p2Results[2][2].palo}${p2Results[2][2].value} ${p2Results[2][3].palo}${p2Results[2][3].value} ${p2Results[2][4].palo}${p2Results[2][4].value}`);
+                }
+            }
+            else{
+                playerTwo = pokerConversorVuelta(playerTwo); //Esto lo pongo porque la constante cambia al ejecutar esta funcion.
+                console.log(`Gana jugador 2 ${p2Results[1]}. Su mano era: ${p2Results[2][0].palo}${p2Results[2][0].value} ${p2Results[2][1].palo}${p2Results[2][1].value} ${p2Results[2][2].palo}${p2Results[2][2].value} ${p2Results[2][3].palo}${p2Results[2][3].value} ${p2Results[2][4].palo}${p2Results[2][4].value}`);
             }
         }
         
