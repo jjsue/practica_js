@@ -178,14 +178,31 @@ function pokerGame(){
     const p1Results = pokerRules(playerOne);
     const p2Results = pokerRules(playerTwo);
     if (p1Results[0] > p2Results[0]){
-        console.log(`Gana jugador uno ${p1Results[1]}. Su mano era: ${p1Results[2][0].palo}${p1Results[2][0].value} ${p1Results[2][1].palo}${p1Results[2][1].value} ${p1Results[2][2].palo}${p1Results[2][2].value} ${p1Results[2][3].palo}${p1Results[2][3].value} ${p1Results[2][4].palo}${p1Results[2][4].value}`)
+        console.log(`Gana jugador uno ${p1Results[1]}. Su mano era: ${p1Results[2][0].palo}${p1Results[2][0].value} ${p1Results[2][1].palo}${p1Results[2][1].value} ${p1Results[2][2].palo}${p1Results[2][2].value} ${p1Results[2][3].palo}${p1Results[2][3].value} ${p1Results[2][4].palo}${p1Results[2][4].value}`);
     }
     else if (p1Results[0] === p2Results[0]){
-            playerOne = pokerConversorNoOrder(p1Results[2]);
-            playerTwo = pokerConversorNoOrder(p2Results[2]);
+        playerOne = pokerConversorNoOrder(p1Results[2]);
+        playerTwo = pokerConversorNoOrder(p2Results[2]);
+        //Empezamos por la carta mas alta.
+        if(p1Results[0] === 1){
+            if (playerOne[4].value > playerTwo[4].value){ 
+                playerOne = pokerConversorVuelta(playerOne); //Esto lo pongo porque la constante cambia al ejecutar esta funcion.
+                console.log(`Gana jugador 1 ${p1Results[1]}. Su mano era: ${p1Results[2][0].palo}${p1Results[2][0].value} ${p1Results[2][1].palo}${p1Results[2][1].value} ${p1Results[2][2].palo}${p1Results[2][2].value} ${p1Results[2][3].palo}${p1Results[2][3].value} ${p1Results[2][4].palo}${p1Results[2][4].value}`);
+            }
+            else if (p1Results[0] === p2Results[0]){
+                playerOne = pokerConversorVuelta(playerOne); //Esto lo pongo porque la constante cambia al ejecutar esta funcion.
+                playerTwo = pokerConversorVuelta(playerTwo);
+                console.log(`Empate a carta mas alta.\n La mano del jugador uno era: ${p1Results[2][0].palo}${p1Results[2][0].value} ${p1Results[2][1].palo}${p1Results[2][1].value} ${p1Results[2][2].palo}${p1Results[2][2].value} ${p1Results[2][3].palo}${p1Results[2][3].value} ${p1Results[2][4].palo}${p1Results[2][4].value}. \n La mano del jugador dos era: ${p2Results[2][0].palo}${p2Results[2][0].value} ${p2Results[2][1].palo}${p2Results[2][1].value} ${p2Results[2][2].palo}${p2Results[2][2].value} ${p2Results[2][3].palo}${p2Results[2][3].value} ${p2Results[2][4].palo}${p2Results[2][4].value}.`);
+            }
+            else{
+                playerTwo = pokerConversorVuelta(playerTwo); //Esto lo pongo porque la constante cambia al ejecutar esta funcion.
+                console.log(`Gana jugador 2 ${p1Results[1]}. Su mano era: ${p2Results[2][0].palo}${p2Results[2][0].value} ${p2Results[2][1].palo}${p2Results[2][1].value} ${p2Results[2][2].palo}${p2Results[2][2].value} ${p2Results[2][3].palo}${p2Results[2][3].value} ${p2Results[2][4].palo}${p2Results[2][4].value}`);
+            }
+        }
+        
     }
     else{
-        console.log(`Gana jugador dos ${p2Results[1]}. Su mano era: ${p2Results[2][0].palo}${p2Results[2][0].value} ${p2Results[2][1].palo}${p2Results[2][1].value} ${p2Results[2][2].palo}${p2Results[2][2].value} ${p2Results[2][3].palo}${p2Results[2][3].value} ${p2Results[2][4].palo}${p2Results[2][4].value}`)
+        console.log(`Gana jugador dos ${p2Results[1]}. Su mano era: ${p2Results[2][0].palo}${p2Results[2][0].value} ${p2Results[2][1].palo}${p2Results[2][1].value} ${p2Results[2][2].palo}${p2Results[2][2].value} ${p2Results[2][3].palo}${p2Results[2][3].value} ${p2Results[2][4].palo}${p2Results[2][4].value}`);
     }
 
 }
