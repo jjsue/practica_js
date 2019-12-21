@@ -1,24 +1,3 @@
-/*Reglas
-
-Sólo se contemplan números entre el 1 y el 3999
-
-    Los símbolos I, X, C y M se pueden repetir hasta tres veces.
-    Los símbolos V, L y D no pueden repetirse.
-    Los símbolos I, X y C se suman si están a la derecha de otro mayor o igual.
-    Los símbolos I, X y C se restan si están a la izquierda de otro mayor y solamente pueden anteponerse a los dos símbolos que le siguen en la sucesión.
-    I se resta de V y X
-    X se resta de L y C
-    C se resta de D y M
-    Los símbolos V, L y D no pueden colocarse a la izquierda de otro mayor.
-Simbolos:
-I : 1
-V : 5
-X : 10
-L : 50
-C : 100
-D : 500
-M : 1000*/
-
 function reverse(string) { //Funcion que me da la vuelta a una cadena.
     let x = string.length;
     let reverseString = '';
@@ -410,4 +389,23 @@ function validator(romanNumber){
     }
     return true;
 }
-console.log(validator('MVI'));
+let arguments = process.argv.splice(2); 
+/*Validador: VAL *Numero deseado*
+Numeros romanos a arabes: RA *Numero deseado*
+Numeros Arabes a romanos: AR *Numero deseado*/
+if (arguments[0] === 'VAL'){
+    console.log(validator(arguments[1]));
+    return 0;
+}
+if (arguments[0] === 'RA'){
+    console.log(romanToArab(arguments[1]));
+    return 0;
+}
+if (arguments[0] === 'AR'){
+    console.log(ArabToRoman(arguments[1]));
+    return 0;
+}
+else{
+    console.log("Parametro invalido");
+    return 0;
+}
