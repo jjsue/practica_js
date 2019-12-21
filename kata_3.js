@@ -155,7 +155,7 @@ function pokerGame(){
     console.log(playerOne);
     const p1Results = pokerRules(playerOne);
     const p2Results = pokerRules(playerTwo);
-    console.log(playerTwo);
+    console.log(playerOne);
     //const p1Results = [2, 'con pareja', {palo: 'H', value: 2}, {palo: 'S', value: 2}, {palo: 'D', value: 4}, {palo: 'D', value: 5}, {palo: 'D', value: 6}]
     //const p2Results = [2, 'con pareja', {palo: 'C', value: 3}, {palo: 'D', value: 3}, {palo: 'D', value: 4}, {palo: 'D', value: 5}, {palo: 'D', value: 6}]
     if (p1Results[0] > p2Results[0]){
