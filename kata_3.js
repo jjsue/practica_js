@@ -69,42 +69,52 @@ function pokerConversor(playerToConvert){
 }
 
 function pokerRules(player){
+    let hand = []; //El array que vamos a devolver para dar un valor numerico a los ganadores.
     //Convertimos a valores numericos todos los valores para que sea mas sencillo de analizar.
     player = pokerConversor(player);
     //Empezamos por la regla mas alta. Escalera de color.
     if ((player[0].palo === player[1].palo && player[0].palo === player[2].palo && player[0].palo === player[3].palo && player[0].palo === player[4].palo) && (player[0].value + 1 === player[1].value && player[1].value + 1 === player[2].value && player[2].value + 1 === player[3].value && player[3].value + 1 === player[4].value)){
-        console.log("Tiene escalera de color");
+        hand = [8, 'con four of a kind.'];
+        return hand;
     }
     // Vamos con el four of a kind o poker.
     else if ((player[0].value === player[1].value && player[0].value === player[2].value && player[0].value === player[3].value) || (player[1].value === player[2].value && player[1].value === player[3].value && player[1].value === player[4].value)){
-        console.log("Tiene poker");
+        hand = [7, 'con four of a kind.'];
+        return hand;
     }
     //Full house. Recordemos que gana el que tenga el trio mas alto.
     else if ((player[0].value === player[1].value && player[0].value === player[2].value && player[3].value === player[4].value) || (player[0].value === player[1].value && player[2].value === player[3].value && player[2].value === player[4].value)){
-        console.log("Tiene full house");
+        hand = [6, 'con full house.'];
+        return hand;
     }
     //Flush, Color, todas cartas mismo palo. Si hay empate gana carta mas alta.
     else if (player[0].palo === player[1].palo && player[0].palo === player[2].palo && player[0].palo === player[3].palo && player[0].palo === player[4].palo){
-        console.log("Tiene flush, color");
+        hand = [5, 'con color.'];
+        return hand;
     }
     //Escalera, todas las cartas consecutivas pero sin ser del mismo palo. Si hay empate gana carta mas alta.
     else if (player[0].value + 1 === player[1].value && player[1].value + 1 === player[2].value && player[2].value + 1 === player[3].value && player[3].value + 1 === player[4].value){
-        console.log ("Tiene escalera sin color");
+        hand = [4, 'con escalera.'];
+        return hand;
     }
     //Vamos con el trio. Si hay empate gana el que tenga el trio de la carta mas alta.
     else if ((player[0].value === player[1].value && player[0].value === player[2].value) || (player[1].value === player[2].value && player[1].value === player[3].value) || (player[2].value === player[3].value && player[2].value === player[4].value)){
-        console.log("Tiene trio");
+        hand = [4, 'con trio.'];
+        return hand;
     }
     //Dobles parejas. Empate gana la pareja mas alta, si las dos parejas son igual de altas se compara la otra pareja, si no, la restante.
     else if((player[0].value === player[1].value && player[2].value === player[3].value) || (player[1].value === player[2].value && player[3].value === player[4].value) || (player[0].value === player[1].value && player[3].value === player[4].value)){
-        console.log("Dobles parejas");
+        hand = [3, 'con dobles parejas.'];
+        return hand;
     }
     // Parejas
     else if(player[0].value === player[1].value || player[1].value === player[2].value || player[2].value === player[3].value || player[3].value === player[4].value){
-        console.log("Parejas");
+        hand = [2, 'con pareja.'];
+        return hand;
     }
     else{
-        console.log("Carta mas alta.");
+        hand = [1, 'con carta mas alta.'];
+        return hand;
     }
 }
 
@@ -124,8 +134,15 @@ function pokerGame(){
             playerTwo.push(mixed[i]);
         }
     }
-    //Con las manos ya barajadas toca ver quien gana. Vamos a crear una función a parte para ordenarlo un poco.
-    console.log(playerOne);
-    pokerRules(playerOne);
+    const playerOneCards = playerOne;
+    const playerTwoCards = playerTwo
+    //Cargamos los resultados a una constante por cada jugador.
+    console.log(playerOneCards);
+    console.log(playerTwoCards)
+    const p1Results = pokerRules(playerOne);
+    const p2Results = pokerRules(playerTwo);
+    console.log(playerOneCards);
+    console.log(playerTwoCards);
 }
+
 pokerGame();
