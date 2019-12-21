@@ -26,6 +26,12 @@ function fooBarQuix(num){
     }
     return num; // Si no pues directamente devolvemos el numero.
 }
-let number = Math.floor((Math.random() * 100) + 1);
+let number = process.argv.splice(2); //Argumentos directamente.
+if (number < 1 || number > 100){
+    console.log("El numero introducido no es correcto.");
+    return 0;
+}
 console.log(`El numero elegido es el: ${number}`);
-console.log(fooBarQuix(number));
+for (i=0; i <= number; i++){
+console.log(fooBarQuix(i));
+}
